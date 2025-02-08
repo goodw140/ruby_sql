@@ -35,3 +35,42 @@ Salesperson.destroy_all
 # Salespeople: 2
 # Ben Block
 # Brian Eng
+
+# schema below:
+# create_table "salespeople", force: :cascade do |t|
+#     t.string "first_name"
+#     t.string "last_name"
+#     t.string "email"
+#     t.datetime "created_at", null: false
+#     t.datetime "updated_at", null: false
+#   end
+
+new_salesperson = Salesperson.new
+new_salesperson["first_name"] = "Ben"
+new_salesperson["last_name"] = "Block"
+new_salesperson["email"] = "benny.boi@gmail.com"
+new_salesperson.save
+
+new_salesperson = Salesperson.new
+new_salesperson["first_name"] = "Brian"
+new_salesperson["last_name"] = "Eng"
+new_salesperson["email"] = "Big-Engergy@gmail.com"
+new_salesperson.save
+
+puts "There are #{Salesperson.all.count} salespeople"
+
+ben = Salesperson.find_by({"first_name" => "Ben", "last_name" => "Block"})
+puts ben.inspect
+
+ben["email"] = "bigboiben@gmail.com"
+ben.save
+
+# loop is how you do #5 properly:
+people = Salesperson.all
+
+for salesperson in people
+    first_name = salesperson["first_name"]
+    last_name = salesperson["last_name"]
+    name = "#{first_name} #{last_name}"
+    puts name
+end
